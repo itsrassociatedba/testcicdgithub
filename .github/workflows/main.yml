@@ -48,10 +48,11 @@ jobs:
       # ------------------------------
       # Step 5: Deploy Code (Runs only if on 'main' branch)
       # ------------------------------
+      - name: Make deploy script executable
+        run: chmod +x deploy.sh
+      
       - name: Deploy to Production
-        shell: bash-wrapper {0}
-        run: |
-           bash deploy.sh
+        run: ./deploy.sh
         if: ${{ github.ref == 'refs/heads/main' }}  # Runs only if on main branch
         continue-on-error: true  # Prevents failure if deployment conditions are unmet
 
